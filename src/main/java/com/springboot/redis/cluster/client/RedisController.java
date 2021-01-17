@@ -3,11 +3,11 @@ package com.springboot.redis.cluster.client;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.thymeleaf.util.StringUtils;
 import redis.clients.jedis.JedisCluster;
 
 @RestController
@@ -30,16 +30,22 @@ public class RedisController {
 
     @RequestMapping(value = "v1/redis/set",method = RequestMethod.GET)
     public String setValue(@RequestParam(value = "key", required = false)String key, @RequestParam(value = "value", required = false)String value){
-        if(StringUtils.hasLength(key) || StringUtils.hasLength(value)){
-            return "Error:key or value is null";
+        if(StringUtils.isEmpty(key)){
+            return "Error:key is null";
         }
+
+        if(StringUtils.isEmpty(value)){
+            return "Error:value is null";
+        }
+
         try{
             jedisCluster.set(key, value);
+            return "successful";
         }catch (Exception e){
             e.printStackTrace();
             return "failed";
         }
-        return "successful";
+
     }
 
     @RequestMapping(value = "v1/redis/say",method = RequestMethod.GET)
