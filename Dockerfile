@@ -2,14 +2,14 @@ FROM image-registry.openshift-image-registry.svc:5000/mdc/base-banking-services@
 
 WORKDIR /build/resource/
 
-RUN git clone https://github.com/hwj829/spring-boot-redis-client.git /build/resource/ && \
-    mvn -DskipTests=true package install -f /build/resource/pom.xml && \
+#RUN git clone https://github.com/hwj829/spring-boot-redis-client.git /build/resource/ && \
+RUN mvn -DskipTests=true package install -f pom.xml && \
     ls -tral /build/resource/ && \
     mkdir /apps-data/ && \
     chgrp -R 0 /apps-data/ && \
     chmod -R 777 /apps-data/ && \
 
-ENTRYPOINT ["java","-jar","/build/resource/target/spring-boot-redis-client-0.0.1-SNAPSHOT.jar.jar","-Dfile.encoding=UTF-8"]
+ENTRYPOINT ["java","-jar","./target/spring-boot-redis-client-0.0.1-SNAPSHOT.jar.jar","-Dfile.encoding=UTF-8"]
 
 EXPOSE 9090
 
