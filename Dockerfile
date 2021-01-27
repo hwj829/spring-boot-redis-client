@@ -9,7 +9,7 @@ RUN git clone https://github.com/hwj829/spring-boot-redis-client.git /build/reso
     chgrp -R 0 /apps-data/ && \
     chmod -R 777 /apps-data/ && \
 
-ENTRYPOINT ["java","-jar","./target/spring-boot-redis-client-0.0.1-SNAPSHOT.jar.jar","-Dfile.encoding=UTF-8"]
+ENTRYPOINT ["java","-jar","/build/resource/target/spring-boot-redis-client-0.0.1-SNAPSHOT.jar.jar","-Dfile.encoding=UTF-8"]
 
 EXPOSE 9090
 
