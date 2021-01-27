@@ -1,1 +1,1 @@
-# spring-boot-redis-client
+# spring-boot-redis-cluster-client
